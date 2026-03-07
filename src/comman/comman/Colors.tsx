@@ -1,0 +1,68 @@
+const tintColorLight = "#6E5CE8";
+const tintColorDark = "#5c99e8ff";
+
+export const Colors = {
+    text: '#ffffffff',
+    noteText: '#362b2bff',
+    background: "#6E5CE8",
+    backgroundColor: '#E9E7FF',
+    tint: tintColorLight,
+    notehighlight: '#1b28bdff',
+    icon: '#fff',
+    couponSection: "#dbdadaff",
+    transparent: 'rgba(0,0,0,0)',
+    sign: '#555',
+    appName: '#0b19daff',
+    button: '#C8E6C9',
+    primary_button: '#2E7D32',
+    confirm_button: '#25b907e1',
+    secondary_button: '#020a61ff',
+    tagline: '#dda808ff',
+    borderColor: '#aaa',
+    backHandler: '#ebe8e8ff',
+    noteTitle: '#fa6400ff',
+    // Surfaces
+    surface: '#FFFFFF',
+    white: '#FFFFFF',
+    black: '#000000',
+    surfaceMuted: '#E8F5E9',
+    surfaceAlt: '#F1F8E9',
+    tabIconDefault: '#687076',
+    tabIconSelected: tintColorLight,
+    TabIconSelected: tintColorDark,
+
+    // Feature Cards
+    featureCardBlue: '#E3F2FD',
+    featureCardBlueB: '#2196F3',
+    featureCardGreen: '#E8F5E9',
+    featureCardGreenB: '#4CAF50',
+    featureCardPurple: '#F3E5F5',
+    featureCardPurpleB: '#9C27B0',
+
+    // New Colors
+    greyText: '#777',
+    lightGreyText: '#999',
+    discountRed: '#E53935',
+    primaryBrand: '#6C79F7',
+    lightBorder: '#ccc',
+    backgroundLight: '#F7F8FA',
+    nearBlack: '#222',
+    darkText: '#333',
+    softRed: '#FF6B6B',
+    purpleBtn: '#6C63FF',
+    primaryBlue: '#6C7BFF',
+    red: '#ff4d4d',
+    uploadColor: '#dfdcdc7c',
+    overlay: 'rgba(0,0,0,0.5)',
+    overlayMuted: 'rgba(0,0,0,0.6)',
+    accentBlue: '#5C6BC0',
+    lightBlue: '#EEF0FF',
+    categoryColors: [
+        "#90f8ff8a",
+        "#f3ea6aa1",
+        "#c5f37aa8",
+        "#ecee6ec5",
+        "#92c9f09a",
+        "#f8ce7f94",
+    ]
+}

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "837021580539",
+    "project_id": "somacy-medical",
+    "storage_bucket": "somacy-medical.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837021580539:android:22c0dedf08fdeec738045e",
+        "android_client_info": {
+          "package_name": "online.medicine.pharmacy.healthcare.meds.mg.labtest.plus.somacy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837021580539-khmf3pak6a9cdcj2b7s2gn7qijkfdogk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "online.medicine.pharmacy.healthcare.meds.mg.labtest.plus.somacy",
+            "certificate_hash": "90295f061aa3b1fc14b46910e9067cbeaf3c37f6"
+          }
+        },
+        {
+          "client_id": "837021580539-o6nn8facb0dq1774v94eh4rc21t5bh56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "online.medicine.pharmacy.healthcare.meds.mg.labtest.plus.somacy",
+            "certificate_hash": "974e3740d7ef07fdc644d26e11079f2989148a9c"
+          }
+        },
+        {
+          "client_id": "837021580539-pcms292ncd474bivus5qibm07r4pkdk7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "online.medicine.pharmacy.healthcare.meds.mg.labtest.plus.somacy",
+            "certificate_hash": "b45aa560f1bda2947781eb914555102a54d9c087"
+          }
+        },
+        {
+          "client_id": "837021580539-acrrar7rd1p7q1kvu0a3iget8132bvg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3S25yPxFPWe-uDtWpSj67Nir48h2YBnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837021580539-acrrar7rd1p7q1kvu0a3iget8132bvg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
