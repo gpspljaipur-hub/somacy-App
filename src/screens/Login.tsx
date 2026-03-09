@@ -70,12 +70,19 @@ const Login = ({ navigation, route }: Props) => {
       setLoading(true);
 
       const res = await fetchMobileCheck(mobile);
+
+
       if (res?.Result === "true") {
+        console.log(res, "resresres");
         const authInstance = getAuth();
+        console.log(authInstance, "authInstanceauthInstance");
+
         const confirmation = await signInWithPhoneNumber(
           authInstance,
           `+91${mobile}`
         );
+        console.log(confirmation, "confirmationconfirmationconfirmation");
+
         navigation.replace("OtpScreen", {
           mobile,
           confirmation,

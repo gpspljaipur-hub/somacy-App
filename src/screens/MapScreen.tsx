@@ -56,6 +56,8 @@ const MapScreen: React.FC<Props> = ({ navigation, route }) => {
   const { address, isEdit, lang } = route.params || {};
 
   const user = useSelector((state: RootState) => state.auth.user);
+  console.log(user, "useruser");
+
   const selectedAddress = useSelector((state: RootState) => state.address.selectedAddress);
   const dispatch = useDispatch();
   const [pincode, setPincode] = useState<any>("")

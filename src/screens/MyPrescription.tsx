@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from "react";
@@ -32,6 +33,9 @@ const MyPrescription = ({ navigation, route }: Props) => {
   const [orderData, setOrderData] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<"ORDER" | "DELIVERED">("ORDER");
   const { lang } = route.params;
+  const limit = 8;
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   /* Localization Data */
   const textData: Record<Language, {
@@ -140,11 +144,19 @@ const MyPrescription = ({ navigation, route }: Props) => {
   };
 
   /*  Fetch orders Details*/
-  const getPrescription = async () => {
+  const getPrescription = async (pageNumber = 1) => {
     try {
       if (!user) return;
-      const res = await fetchPresHistory(user.id);
-      setOrderData(res?.PrescriptionHistory || []);
+      const res = await fetchPresHistory(user.id, pageNumber, limit);
+      // setOrderData(res?.PrescriptionHistory || []);
+      const newOrders = res?.PrescriptionHistory || [];
+      console.log(res, "newOrdersnewOrdersnewOrders");
+
+      if (pageNumber === 1) {
+        setOrderData(newOrders);
+      } else {
+        setOrderData(prev => [...prev, ...newOrders]);
+      }
     } catch (error) {
       console.log("Order history error", error);
     }
@@ -152,10 +164,49 @@ const MyPrescription = ({ navigation, route }: Props) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      getPrescription();
+      setPage(1);
+      getPrescription(1);
     }, [user])
   );
   console.log(orderData, "orderdata");
+  const loadMoreOrders = () => {
+    if (loadingMore) return;
+
+    setLoadingMore(true);
+
+    const nextPage = page + 1;
+    setPage(nextPage);
+
+    getPrescription(nextPage);
+
+    setLoadingMore(false);
+  };
+
+  // const getOrders = async (pageNumber = 1) => {
+  //   try {
+  //     if (!user) return;
+
+  //     const res = await fetchOrderHistory(user.id, pageNumber, limit);
+  //     console.log(res, "bkdscjzjbb");
+
+  //     const newOrders = res?.OrderHistory || [];
+  //     console.log(newOrders, "newOrdersnewOrdersnewOrders");
+
+  //     if (pageNumber === 1) {
+  //       setOrderData(newOrders);
+  //     } else {
+  //       setOrderData(prev => [...prev, ...newOrders]);
+  //     }
+
+  //   } catch (error) {
+  //     console.log("Order history error", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   setPage(1);
+  //   getOrders(1);
+  // }, [user]);
 
   const handleCancelOrder = async (orderId: string) => {
     if (!user) return;
@@ -294,11 +345,26 @@ const MyPrescription = ({ navigation, route }: Props) => {
 
 
       {filteredOrders.length > 0 ? (
+        // <FlatList
+        //   data={filteredOrders}
+        //   keyExtractor={(item, index) => index.toString()}
+        //   renderItem={renderOrder}
+        //   contentContainerStyle={{ paddingBottom: MarginHW.PaddingH20 }}
+        // />
         <FlatList
           data={filteredOrders}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderOrder}
           contentContainerStyle={{ paddingBottom: MarginHW.PaddingH20 }}
+
+          onEndReached={loadMoreOrders}
+          onEndReachedThreshold={0.5}
+
+          ListFooterComponent={
+            loadingMore ? (
+              <ActivityIndicator size="small" color="gray" style={{ marginVertical: 10 }} />
+            ) : null
+          }
         />
       ) : (
         <View style={styles.emptyContainer}>

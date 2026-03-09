@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 
 import React, { useEffect, useState } from "react";
@@ -31,6 +32,9 @@ const MyOrder = ({ navigation, route }: Props) => {
   const [orderData, setOrderData] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<"ORDER" | "DELIVERED">("ORDER");
   const lang = route.params?.lang;
+  const limit = 8;
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   /* Localization Data */
   const textData: Record<Language, {
@@ -118,19 +122,41 @@ const MyOrder = ({ navigation, route }: Props) => {
   };
 
   /*  Fetch orders Details*/
-  const getOrders = async () => {
+  const getOrders = async (pageNumber = 1) => {
     try {
       if (!user) return;
-      const res = await fetchOrderHistory(user.id);
-      setOrderData(res?.OrderHistory || []);
+
+      const res = await fetchOrderHistory(user.id, pageNumber, limit);
+
+      const newOrders = res?.OrderHistory || [];
+
+      if (pageNumber === 1) {
+        setOrderData(newOrders);
+      } else {
+        setOrderData(prev => [...prev, ...newOrders]);
+      }
+
     } catch (error) {
       console.log("Order history error", error);
     }
   };
 
   useEffect(() => {
-    getOrders();
+    setPage(1);
+    getOrders(1);
   }, [user]);
+  const loadMoreOrders = () => {
+    if (loadingMore) return;
+
+    setLoadingMore(true);
+
+    const nextPage = page + 1;
+    setPage(nextPage);
+
+    getOrders(nextPage);
+
+    setLoadingMore(false);
+  };
 
   const handleCancelOrder = async (orderId: string) => {
     console.log(orderId, "orderIdorderIdorderId");
@@ -248,11 +274,26 @@ const MyOrder = ({ navigation, route }: Props) => {
       </View>
 
       {filteredOrders.length > 0 ? (
+        // <FlatList
+        //   data={filteredOrders}
+        //   keyExtractor={(item, index) => index.toString()}
+        //   renderItem={renderOrder}
+        //   contentContainerStyle={{ paddingBottom: MarginHW.PaddingH20 }}
+        // />
         <FlatList
           data={filteredOrders}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderOrder}
           contentContainerStyle={{ paddingBottom: MarginHW.PaddingH20 }}
+
+          onEndReached={loadMoreOrders}
+          onEndReachedThreshold={0.5}
+
+          ListFooterComponent={
+            loadingMore ? (
+              <ActivityIndicator size="small" color="gray" style={{ marginVertical: 10 }} />
+            ) : null
+          }
         />
       ) : (
         <View style={styles.emptyContainer}>

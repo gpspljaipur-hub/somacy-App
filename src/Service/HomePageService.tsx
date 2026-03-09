@@ -60,8 +60,8 @@ export const fetchProductSearch = async (keyword: string): Promise<any | string>
     return response?.data
 }
 
-export const fetchOrderHistory = async (uid: string): Promise<any | string> => {
-    const response = await axiosInstance?.post(ApiUrl?.HomePageUrl?.ORDER_HISTORY, { uid })
+export const fetchOrderHistory = async (uid: string, page: any, limit: any): Promise<any | string> => {
+    const response = await axiosInstance?.post(ApiUrl?.HomePageUrl?.ORDER_HISTORY, { uid, page, limit })
     return response?.data
 }
 export const ProductOrderDetails = async (uid: string, order_id: any): Promise<any | string> => {
@@ -69,8 +69,8 @@ export const ProductOrderDetails = async (uid: string, order_id: any): Promise<a
     return response?.data
 }
 
-export const fetchPresHistory = async (uid: string): Promise<any | string> => {
-    const response = await axiosInstance?.post(ApiUrl?.HomePageUrl?.PRESCRIPTION_HISTORY, { uid })
+export const fetchPresHistory = async (uid: string, page: any, limit: any): Promise<any | string> => {
+    const response = await axiosInstance?.post(ApiUrl?.HomePageUrl?.PRESCRIPTION_HISTORY, { uid, page, limit })
     return response?.data
 }
 
